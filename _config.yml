@@ -1,0 +1,12 @@
+# Site settings
+title: Devopsfun
+email: 
+description: "Introductory hands-on training for open source devops workflow - from code to deployment"
+baseurl: "/devopsfun"
+url: "http://ritazh.github.io"
+twitter_username: ritazzhang
+github_username:  ritazh
+
+# Build settings
+markdown: kramdown
+permalink: pretty
