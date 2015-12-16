@@ -29,13 +29,14 @@ There are several ways to install Git on a Mac. You can choose from one of the f
 2. If you already have Homebrew, you can install Git by executing:
 
 ```
-brew install git
+$ brew install git
 ```
 
 Make sure you update your `$PATH` environment variable to include the latest install path of Git. For example:
 
 ```
-echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"' >> ~/.bash_profile
+$ echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"' >> ~/.bash_profile
+
 ```
 
 3. If you don't mind registering an apple developer account, then install the Xcode Command Line Tools. Go to connect.apple.com and register an Apple Developer account. Once you’ve registered, go to developer.apple.com/xcode, then click on “View downloads” and finding the appropriate command line tools for your version of OS X in the list. When your download finishes, go ahead and open the DMG.

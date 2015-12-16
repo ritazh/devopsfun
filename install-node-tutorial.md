@@ -14,10 +14,10 @@ When you install Node.js, you'll want to ensure your `PATH` variable includes yo
 ### Test your install
 Create a new directory named `hello-world`, add a new `app.js` file with the following content:
 
-  ```js
-  /* app.js */
-  console.log('Hello World!');
-  ```
+```js
+/* app.js */
+console.log('Hello World!');
+```
 
 In the command prompt (or terminal on Mac) , run `node app.js`.
 
