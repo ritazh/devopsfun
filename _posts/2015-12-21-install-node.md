@@ -28,7 +28,7 @@ console.log('Hello World!');
 {% endhighlight %}
 
 In the command prompt (or terminal on Mac) , run 
-{% highlight shell %}
+{% highlight bash %}
 $ node app.js
 {% endhighlight %}
 

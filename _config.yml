@@ -3,7 +3,9 @@ description:      Training for Open Source DevOps Workflow
 disqus_shortname: devopsfun
 reading_time:     true
 words_per_minute: 200
-url: 
+baseurl: "/devopsfun"
+url: "http://ritazh.github.io"
+rel_url: "http://ritazh.github.io/devopsfun"
 
 # Owner/author information
 owner:

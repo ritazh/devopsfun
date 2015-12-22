@@ -37,14 +37,14 @@ There are several ways to install Git on a Mac. You can choose from one of the f
 
 2. If you already have Homebrew, you can install Git by executing:
 
-{% highlight shell %}
+{% highlight bash %}
 $ brew install git
 
 {% endhighlight %}
 
 Make sure you update your `$PATH` environment variable to include the latest install path of Git. For example:
 
-{% highlight shell %}
+{% highlight bash %}
 $ echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"' >> ~/.bash_profile
 
 {% endhighlight %}
@@ -53,9 +53,9 @@ $ echo 'export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"' >> ~/.bash_pro
 Run the Command Line Tools installer. On Mavericks (10.9) or above you can do this simply by trying to run git from the Terminal the very first time. If you don’t have it installed already, it will prompt you to install it. 
 
 #### Get Git for Windows
-If you're already using Chocolatey or Windows 10's package manager to install software, you can simply run the following command from an elevated PowerShell (right click, select 'Run as Administrator'):
+If you're already using Chocolatey or Windows 10's package manager to install software, you can simply run the following command from an elevated Powerbash (right click, select 'Run as Administrator'):
 
-{% highlight shell %}
+{% highlight bash %}
 $ cinst git.install
 $ cinst poshgit
 
@@ -84,13 +84,13 @@ Visit your fork (which should be at github.com/{your_name}/?) and copy the "HTTP
 
 Now that you have Git installed, open up PowerShell on Windows or terminal on Mac. If everything worked correctly, you should be able to run `git --version`. If that works, navigate to a folder where you'd like to keep the `?` repository. To get a copy of your fork onto your local machine, run:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git clone https://github.com/{YOUR_USERNAME}/?
 {% endhighlight %}
 
 This should generate output that looks roughly like this:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git --version
 git version 1.9.5.msysgit.1
 $ git clone https://github.com/{YOUR_USERNAME}/?
@@ -110,7 +110,7 @@ You can run `explorer .` from PowerShell on Windows or `open .` from Terminal on
 ### Creating a new Branch for your repo
 In modern Git development, every single change that you want to make to the code base will be made in a "branch". Like a tree branch, the branch is "based" on a different branch, and unlike other SCM systems, Git branches are very lightweight. In our case, your base branch will always be `master`, which is the default branch name for GitHub repositories. In order to create a new branch, you can always run:
 
-{% highlight shell %}
+{% highlight bash %}
 # This makes sure that your new branch is based on master
 $ git checkout master
 # This creates the new branch
@@ -123,13 +123,13 @@ You can now go ahead and make your changes - adding files, writing code, fixing 
 ### Staging your Changes for a Commit
 Now that you made your changes, you can "stage" them for a commit. Whenever you stage a file for a commit, you make a snapshot of the file at the time you're staging it for a commit. If you change a file after you staged it, you will have to stage it again. To stage a file, simply run:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git add ./path-to/my-file.md
 {% endhighlight %}
 
 If you just want to stage all files in your current repository (including deletions), run:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git add --all .
 {% endhighlight %}
 
@@ -140,19 +140,19 @@ Now that your changes have been staged, we're ready to commit them. You can eith
 The default editor will most likely be Vim. If you don't like that, use [GitPad](https://github.com/github/GitPad) - it'll make sure that you can edit all your Git messages with whatever editor is associated with `txt` files.
 
 To commit the quick way:
-{% highlight shell %}
+{% highlight bash %}
 $ git commit -m "Add new feature: Git is cool"
 {% endhighlight %}
 
 To commit the long way, allowing you to define both title and message of your commit:
-{% highlight shell %}
+{% highlight bash %}
 $ git commit
 {% endhighlight %}
 
 ### Push your new Branch to Your Fork on GitHub
 You wrote a new feature, made some changes, committed - now we have to make sure that your changes also end up on GitHub. To do so, we have to push your local branch to your fork on GitHub. Run the command below (obviously using the name of the branch you want to push)
 
-{% highlight shell %}
+{% highlight bash %}
 $ git checkout NAME_OF_YOUR_BRANCH
 $ git push -u origin NAME_OF_YOUR_BRANCH
 
@@ -174,7 +174,7 @@ Let's look at a scenario: You just pushed your branch (using `git push -u origin
 
 To update the PR with additional changes, edit your files in your branch - then, commit the changes and push them to GitHub:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git checkout NAME_OF_YOUR_BRANCH
 # Make changes, stage all changes for commit
 $ git add --all .
@@ -186,7 +186,7 @@ $ git push
 
 If you want to update your Pull Request without creating a new commit, you can "amend" your last commit. To do so, call `git commit` with the `--amend` parameter and force-push the result to GitHub, overwriting the previous version.
 
-{% highlight shell %}
+{% highlight bash %}
 $ git checkout NAME_OF_YOUR_BRANCH
 # Make changes, stage all changes for commit
 $ git add --all .
@@ -201,7 +201,7 @@ You should commit often. It's a great practice to backup in case you mess up. At
 
 Rewriting Git history is a little bit scary, but it's easy to do. Here's the setup: You just made six commits to your branch. Before making a pull request, you want all those commits to be turned into one. To change the history of your last six commits, run:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git rebase -i HEAD~6
 
 {% endhighlight %}
@@ -210,7 +210,7 @@ It is important that you change only commits that *you* made, since your branch 
 
 Once you run the command, you will be presented with a screen that looks like this:
 
-{% highlight shell %}
+{% highlight bash %}
 pick 4a67852 Update interactions.js
 pick e9c1c12 Further Mini-JS Optimizations
 pick 676adb6 Listener is always undefined
@@ -227,11 +227,11 @@ See how every single commit begins with the word `pick`, followed by its commit 
  * `e`, `edit`: use commit, but stop for amending
  * `s`, `squash`: use commit, but meld into previous commit
  * `f`, `fixup`: like "squash", but discard this commit's log message
- * `x`, `exec`: run command (the rest of the line) using shell
+ * `x`, `exec`: run command (the rest of the line) using bash
 
 In order to squash all six commits into the very first one you made, you would change the file to:
 
-{% highlight shell %}
+{% highlight bash %}
 pick 4a67852 Update interactions.js
 fixup e9c1c12 Further Mini-JS Optimizations
 fixup 676adb6 Listener is always undefined
@@ -242,13 +242,13 @@ fixup 1cd833d Fix Deployment Folder
 
 Then, once you're done, update the branch on your own fork in GitHub. Push with the `f` parameter (force), telling Git to overwrite whatever GitHub has in the branch:
 
-{% highlight shell %}
+{% highlight bash %}
 $ git push -f
 {% endhighlight %}
 
 If you never pushed the branch before, you can use the normal push command - there's no history that we need to overwrite with the `f` paramter.
 
-{% highlight shell %}
+{% highlight bash %}
 $ git push -u origin NAME_OF_YOUR_BRANCH
 {% endhighlight %}
 
@@ -257,7 +257,7 @@ $ git push -u origin NAME_OF_YOUR_BRANCH
 
 After some time, you'll find that your fork has become out of sync with the upstream repository (as others add features and bug fixes and they get merged in). To sync your fork up, you just need to do a local rebase and then push those changes. There are few different ways to do this, but this is one that helps you rebase when syncing with the latest from upstream:
 
-{% highlight shell %}
+{% highlight bash %}
 # Now make sure you're on master - the main branch for this project
 $ git checkout master
 # Get all of the latest from upstream master branch
