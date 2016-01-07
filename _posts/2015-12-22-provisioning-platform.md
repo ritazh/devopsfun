@@ -171,20 +171,23 @@ $ eval `ssh-agent -s`
 $ ssh-add ~/.ssh/deis
 {% endhighlight %}
 
+##### Configuring DEISCTL_TUNNEL
 To enable `deisctl` to communicate with the Deis CoreOS cluster, we need to set the `DEISCTL_TUNNEL` environment variable to the public IP address of one of our nodes. You can lookup the public IP address from the [Validating Deployment](#validating-deployment) step or access the [Azure portal](https://ms.portal.azure.com/).
 
 {% highlight bash %}
 $ export DEISCTL_TUNNEL=40.121.xx.xx
 {% endhighlight %}
 
+##### Configuring SSH Key for Platform
 To allow Deis to connect to remote hosts for `deis run` commands, we need to add the private SSH key we generated for this deployment to the platform:
 {% highlight bash %}
 $ deisctl config platform set sshPrivateKey=~/.ssh/deis
 {% endhighlight %}
 
+##### Configuring Domain for Platform
 We also need to tell the Deis controller the domain name we want to use for deploying applications. In our case, we want to use the public ip of our load balancer together with [xip](http://xip.io/) as our domain, (note, this is not the public IP of any of the nodes).
 {% highlight bash %}
-$ deisctl config platform set domain=deis.104.209.xxx.xxx.xip.io
+$ deisctl config platform set domain=mysubdomain.104.209.xxx.xxx.xip.io
 {% endhighlight %}
 
 To validate communicate has been setup correctly, test with the following:
