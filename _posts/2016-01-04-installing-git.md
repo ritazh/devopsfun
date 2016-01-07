@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Git Setup
+title: Installing Git
 modified:
 categories: 
-description: "Install and setup git locally"
+description: "Installing and setting up git locally"
 tags: []
 image:
   feature: abstract-11.jpg
@@ -11,9 +11,9 @@ image:
   creditlink:
 comments:
 share:
-date: 2015-12-21T23:32:07-08:00
+date: 2016-01-04T23:32:07-08:00
 ---
-### Install and Setup Git
+### Installing and Setting up Git
 
 Chances are, you already have git running on your computer or you at least have heard of Git before. For this training, you will need to setup git locally and know few basics about git.
 
@@ -26,10 +26,10 @@ Chances are, you already have git running on your computer or you at least have 
   - [Commit your Changes](#commit-your-changes)
   - [Push your new Branch to Your Fork on GitHub](#push-your-new-branch-to-your-fork-on-github)
 
-### Install Git
+### Installing Git
 If you don't have Git installed, navigate to the official [Git Download page and download it](https://git-scm.com/download). 
 
-#### Get Git for Mac
+#### Getting Git for Mac
 There are several ways to install Git on a Mac. You can choose from one of the following ways:
 
 1) If you want a more up to date version, you can also install it via a binary installer. An OSX Git installer is maintained and available for download at the Git website, at [http://git-scm.com/download/mac](http://git-scm.com/download/mac).
@@ -49,7 +49,7 @@ There are several ways to install Git on a Mac. You can choose from one of the f
 3) If you don't mind registering an Apple developer account, then install the Xcode Command Line Tools. Go to [connect.apple.com](connect.apple.com) and register an Apple Developer account. Once you’ve registered, go to [developer.apple.com/xcode](developer.apple.com/xcode), then click on “View downloads” and finding the appropriate command line tools for your version of OS X in the list. When your download finishes, go ahead and open the DMG.
 Run the Command Line Tools installer. On Mavericks (10.9) or above you can do this simply by trying to run git from the Terminal the very first time. If you don’t have it installed already, it will prompt you to install it. 
 
-#### Get Git for Windows
+#### Getting Git for Windows
 If you're already using Chocolatey or Windows 10's package manager to install software, you can simply run the following command from an elevated Powerbash (right click, select 'Run as Administrator'):
 
 {% highlight bash %}
@@ -64,20 +64,20 @@ $ cinst github
 
 {% endhighlight %}
 
-#### Verify Git Installation
+#### Verifying Git Installation
 Now that you have Git installed, open up PowerShell on Windows or terminal on Mac. If everything worked correctly, you should be able to run `git --version`. 
 
-### Sign up for a Free GitHub account
+### Signing up for a Free GitHub account
 Before we can get started, you need to register with GitHub for a free account. Either create or login into your account on [GitHub](https://github.com/join).
 
-### Fork a Repository to your Account
+### Forking a Repository to your Account
 Now you are ready to do more with Git. Let's start with a sample project. Head over to the [devopsfun repo on GitHub](https://github.com/ritazh/devopsfun) repository and click the little 'fork' button in the upper right.
 
 ![Fork the repo]({{ site.rel_url }}/images/fork.png)
 
 This will create a copy of the repository as it exists in the original account into your own account.
 
-### Clone the Repository to Your Machine
+### Cloning the Repository to Your Machine
 Visit your fork (which should be at github.com/{your_github_username}/devopsfun) and copy the "HTTPS Clone URL". Using this URL, you're able to `clone` the repository, which downloads the whole repository, including its history and information about its origin locally. From PowerShell on Windows or terminal on Mac, change into the directory where you would like to clone your repo.
 
 ![Clone the repo]({{ site.rel_url }}/images/clone.png)
@@ -124,7 +124,7 @@ If you just want to stage all files in your current repository (including deleti
 $ git add --all .
 {% endhighlight %}
 
-### Commit your Changes
+### Committing your Changes
 Now that your changes have been staged, we're ready to commit them. You can either pass the commit command a title for your commit - or omit the parameter, in which case Git will open up the default text editor for you to create a commit message.
 
 To commit the quick way:
@@ -137,7 +137,7 @@ To commit the long way, allowing you to define both title and message of your co
 $ git commit
 {% endhighlight %}
 
-### Push your new Branch to Your Fork on GitHub
+### Pushing your new Branch to Your Fork on GitHub
 Let's say you have implemented a new feature, made some changes, committed the changes - now we have to make sure that your changes also end up on GitHub. To do so, we have to push your local branch to your fork on GitHub. Run the command below, using the name of the branch you want to push to
 
 {% highlight bash %}
@@ -145,7 +145,7 @@ $ git checkout NAME_OF_YOUR_NEW_BRANCH
 $ git push -u origin NAME_OF_YOUR_NEW_BRANCH
 {% endhighlight %}
 
-### Bonus: Make a Pull Request
+### Bonus: Making a Pull Request
 Now, head over to the [devopsfun](https://github.com/ritazh/devopsfun) repository. In most cases, GitHub will pick up on the fact that you just pushed a branch with some changes to your local fork, assuming that you probably want for those changes to end up in the upstream branch. To help you, it'll show a little box right above the code asking you if you want to make a pull request.
 
 ![Make a Pull Request]({{ site.rel_url }}/images/pullrequest.png)

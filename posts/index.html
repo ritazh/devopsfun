@@ -4,29 +4,83 @@ title: All Modules
 description: "All modules for this training"
 comments: false
 ---
-
-{% for post in site.posts %}
-    {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
-    {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
-
-    {% if forloop.first %}
-    <article>
-      <h2 id="{{ this_year }}-ref">{{ this_year }}</h2>
+  <article>
+      <h2>Module 0: Preparation</h2>
       <ul>
-    {% endif %}
-
-        <li class="entry-title"><a href="{{ site.rel_url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-
-    {% if forloop.last %}
+        <li class="entry-title">
+          <a href="installing-node/">
+            Installing Node.js
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="installing-git/">
+            Signing up for a GitHub Account and installing git
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="installing-vscode/">
+            Installing Visual Studio Code
+          </a>
+        </li>
       </ul>
-    </article>
-    {% else %}
-        {% if this_year != next_year %}
-          </ul>
-        </article>
-        <article>
-          <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
-          <ul>
-        {% endif %}
-    {% endif %}
-{% endfor %}
+  </article>
+  <article>
+    <h2>Module 1: Developing App</h2>
+      <ul>
+        <li class="entry-title">
+        <a href="npm-install">
+          npm install
+        </a>
+      </li>
+      </ul>
+  </article>
+  <article>
+    <h2>Module 2: Provisioning Platform for Testing and Scaling</h2>
+      <ul>
+        <li class="entry-title">
+          <a href="provisioning-platform/">
+            Provisioning Resources for Deis on Azure
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="provisioning-platform#installing-the-deis-platform">
+            Installing the Deis Platform
+          </a>
+        </li>
+      </ul>
+  </article>
+  <article>
+    <h2>Module 3: Deploying App</h2>
+      <ul>
+        <li class="entry-title">
+          <a href="deploying-app#creating-a-new-app">
+            Creating a New App
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="deploying-app#pushing-app">
+            Pushing App
+          </a>
+        </li>
+      </ul>
+  </article>
+  <article>
+    <h2>Module 4: Managing App</h2>
+      <ul>
+        <li class="entry-title">
+          <a href="managing-app#scaling-app">
+            Scaling App
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="managing-app#adding-a-domain">
+            Adding a Domain
+          </a>
+        </li>
+        <li class="entry-title">
+          <a href="managing-app#configuring-app-environment-variable">
+            Configuring App Environment Variable
+          </a>
+        </li>
+      </ul>
+  </article>

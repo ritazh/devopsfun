@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Install Node
+title: Installing Node
 modified:
 categories: 
 description: "Install and configure node.js locally"
@@ -11,14 +11,14 @@ image:
   creditlink:
 comments:
 share:
-date: 2015-12-21T22:27:40-08:00
+date: 2016-01-06T22:27:40-08:00
 ---
-### Install Node.js
+### Installing Node.js
 Download install package from [https://nodejs.org](https://nodejs.org)
 
 When you install Node.js, you'll want to ensure your `PATH` variable includes your install path so you can call Node from anywhere.
 
-### Test Your Install
+### Testing Your Install
 Create a new directory named `hello-world`, add a new `app.js` file with the following content:
 
 {% highlight js %}
