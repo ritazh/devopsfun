@@ -24,7 +24,6 @@ Create a new directory named `hello-world`, add a new `app.js` file with the fol
 {% highlight js %}
 /* app.js */
 console.log('Hello World!');
-
 {% endhighlight %}
 
 In the command prompt (or terminal on Mac) , run 

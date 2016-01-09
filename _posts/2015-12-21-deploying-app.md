@@ -3,7 +3,7 @@ layout: post
 title: Deploying an App
 modified:
 categories: 
-description: "Deploying App"
+description: "Deploying an App"
 tags: []
 image:
   feature: abstract-1.jpg
@@ -14,76 +14,156 @@ share:
 date: 2015-12-21T15:02:46-08:00
 ---
 ## Deploying an App
-In the previous module, you learned how to create your own application platform on Azure with Deis. Now in this module, let's see how to deploy and scale an application to this platform using a simple `git push`. 
-
-### Registering with Deis Controller
-Before we can push apps to your Deis cluster, we need to first use `deis register` to register a user with the Deis Controller URL to create a new account. After a new user is registered, you will be logged in automatically. If you or your administrator already created a deis user account, you can use that to [login](#login-to-a-controller).
-
-> Note: The domain you use here should match the one you configured with `deisctl config platform set domain=` in the [previous module](../provisioning-platform#configuring-domain-for-platform). When communicating with the controller, you should always use `deis.<domain>`.
-{% highlight bash %}
-$ deis register http://deis.mysubdomain.104.209.xxx.xxx.xip.io
-username: deis
-password: 
-password (confirm): 
-email: deis@example.com
-Registered deis
-Logged in as deis
-{% endhighlight %}
-
-### Login to a Controller
-If you have not logged in and already have a Deis user account, user `deis login` to authenticate against the Deis Controller.
-{% highlight bash %}
-$ deis login http://deis.mysubdomain.104.209.xxx.xxx.xip.io
-username: deis
-password:
-Logged in as deis
-{% endhighlight %}
-
-### Uploading SSH Public Key
-In order to use `git push` to deploy applications to Deis, we need to add our default SSH public key to Deis keys using `deis keys:add` to upload it.
-{% highlight bash %}
-# In this case, id_rsa.pub is the default SSH key used for git push.
-$ deis keys:add
-Found the following SSH public keys:
-1) id_rsa.pub
-Which would you like to use with Deis? 1
-Uploading /Users/myuser/.ssh/id_rsa.pub to Deis... done
-{% endhighlight %}
-
-Congratulations! Now you are ready to create apps and push for deployments!
+In the previous module, you learned how to create your own application platform on Azure with Dokku. Congratulations! Now you are ready to create apps and push for deployments to this platform using a simple `git push`. 
 
 ### Creating an Application
-Before you can deploy an application, you have to authenticate against the Deis Controller. Refer to the [login section](#login-to-a-controller).
 
-Deis supports three different ways of deploying applications:
-- [Heroku Buildpacks](https://devcenter.heroku.com/articles/buildpacks)
-- [Dockerfiles](https://devcenter.heroku.com/articles/buildpacks)
-- [Docker Images](https://devcenter.heroku.com/articles/buildpacks)
+Dokku defaults to using Buildpack to deploy applications, unless a valid Dockerfile is detected at the root of your repository.
 
-For the purpose of this training, we are going to deploy our application with builtin buildpacks. Deis will cycle through the `bin/detect` script of each buildpack to match the code you are pushing. During `git push`, you will see `-----> Node.js app detected` in the output.
+- [Buildpacks](http://dokku.viewdocs.io/dokku/deployment/buildpacks/): Using Heroku buildpacks to auto detect framework and runtime support for your application.
+- [Dockerfiles](http://dokku.viewdocs.io/dokku/deployment/dockerfiles/): Dockerfiles are used to define a portable execution environment built on a base OS of your choosing.
 
-Use `deis create` to create an application.
+For the purpose of this training, we are going to deploy our application with builtin buildpacks. During `git push`, Dokku will automatically detect the right Buildpack for your application, you will see `-----> Node.js app detected` in the output.
+
+SSH into the host we just provisioned using the private key of the ssh key pair we used in the previous module:
 {% highlight bash %}
-$ deis create
-Creating Application... done, created quoted-rucksack
-Git remote deis added
-remote available at ssh://git@deis.mysubdomain.104.209.xxx.xxx.xip.io:2222/quoted-rucksack.git
+$ ssh -i <your-ssh-private-key> <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com
 {% endhighlight %}
 
-To understand what is going on, let's see the list of remote repositories connected to this project.
+Create a new Dokku application:
 {% highlight bash %}
+$ dokku apps:create hackathon-starter
+Creating hackathon-starter... done
+{% endhighlight %}
+
+### Adding MongoDB
+Our Node.js application won't work without a database. Previously we were test our app locally with a MongoDB instance running locally. Now we we need to create a MongoDB instance for our application data on Dokku and link it to the application we just created by using the `Dokku Mongo plugin`:
+
+{% highlight bash %}
+# install the mongo plugin
+# plugin installation requires root, hence the user change
+$ sudo dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
+
+# create a postgres service with the name nodeapp
+$ dokku mongo:create nodeapp
+-----> Starting container
+       Waiting for container to be ready
+=====> MongoDB container created: nodeapp
+       DSN: mongodb://nodeapp:1080854ca703fc3de69fad128ea553ef@dokku-mongo-nodeapp:27017/nodeapp
+{% endhighlight %}
+
+Each official datastore offers a `link` method to link a service to any application. We will link the new mongodb instance to our Node.js application. Note the environment variable `MONGO_URL` has been set to the new instance. We will need this environment variable in a later step.
+
+{% highlight bash %}
+$ dokku mongo:link nodeapp hackathon-starterno config vars for hackathon-starter
+-----> Setting config vars
+       MONGO_URL: mongodb://nodeapp:1080854ca703fc3de69fad128ea553ef@dokku-mongo-nodeapp:27017/nodeapp
+-----> Restarting app hackathon-starter
+App hackathon-starter has not been deployed
+{% endhighlight %}
+
+To verify that we have linked the database and the Node.js application successfully:
+{% highlight bash %}
+$ dokku mongo:list
+NAME       VERSION      STATUS   EXPOSED PORTS  LINKS
+nodeapp    mongo:3.0.6  running  -              hackathon-starter 
+{% endhighlight %}
+
+### Add Dokku Remote Repo
+
+From your local environment (not the Dokku VM), navigate to your project folder. Add a `dokku` remote to your local git repository using the `dokku` user name to push the app.
+{% highlight bash %}
+$ git remote add dokku dokku@ritadokku.eastus2.cloudapp.azure.com:hackathon-starter
 $ git remote -v
-deis	ssh://git@deis.mysubdomain.104.209.xxx.xxx.xip.io:2222/quoted-rucksack.git (fetch)
-deis	ssh://git@deis.mysubdomain.104.209.xxx.xxx.xip.io:2222/quoted-rucksack.git (push)
-origin	https://github.com/[test repo].git (fetch)
-origin	https://github.com/[test repo].git (push)
+dokku	dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter (fetch)
+dokku	dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter (push)
+origin	https://github.com/sahat/hackathon-starter.git (fetch)
+origin	https://github.com/sahat/hackathon-starter.git (push)
 {% endhighlight %}
+
+### Update Environment File for Mongo
+Before we push our app to Dokku, we need to update the `.env.example` file to tell the app to use the MongoDB instance we just created.
+
+Recall this is the current `.env.example` configuration setting for Mongo:
+
+```
+MONGODB=mongodb://localhost:27017/test
+```
+
+
+We need to update this value to the `$MONGO_URL` environment variable set in the previous step when we linked the Mongo service to this app.
+
+```
+MONGODB=$MONGO_URL
+```
+
+Save this file, then use `git add` and `git commit` to push the change to your local master branch so that the updates will be deployed to Dokku when we push the app.
 
 ### Git Push to Deploy
-Use `git push deis [branch to deploy]` to deploy your application.
+Good job! We are almost there! Now we can finally push our application to Dokku.
+
+Deploy the app with `git push` and Dokku will create the application on the server.
 {% highlight bash %}
-# In this example, we are pushing the latest in master branch to Deis.
-$ git push deis master
+$ git push dokku master
 {% endhighlight %}
 
-Because a Heroku-style application is detected, the web process type is automatically scaled to 1 on the first deployment.
+Your output should look similar to below. Notice how Dokku automatically detects our app is a Node.js app.
+{% highlight bash %}
+Counting objects: 8446, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3376/3376), done.
+Writing objects: 100% (8446/8446), 7.72 MiB | 650.00 KiB/s, done.
+Total 8446 (delta 4909), reused 8437 (delta 4904)
+-----> Cleaning up...
+-----> Building hackathon-starter from herokuish...
+-----> Adding BUILD_ENV to build environment...
+-----> Node.js app detected
+       
+-----> Creating runtime environment
+       
+       NPM_CONFIG_LOGLEVEL=error
+       NPM_CONFIG_PRODUCTION=true
+       NODE_ENV=production
+       NODE_MODULES_CACHE=true
+       
+-----> Installing binaries
+...
+
+-----> Restoring cache
+       Skipping cache restore (new runtime signature)
+       
+-----> Building dependencies
+       Pruning any extraneous modules
+       Installing node modules (package.json)
+...
+{% endhighlight %}
+
+The entire process builds a Docker image with all the dependencies our Node.js app needs. At the end, it will start the container with the recently built image deployed to the domain address we specified in the previous module. 
+{% highlight bash %}
+=====> hackathon-starter container output:
+       > hackathon-starter@3.4.0 start /app
+       > node app.js
+       Express server listening on port 5000 in production mode
+=====> end hackathon-starter container output
+-----> Running post-deploy
+-----> Creating new /home/dokku/hackathon-starter/VHOST...
+-----> Setting config vars
+       DOKKU_NGINX_PORT: 80
+-----> Configuring hackathon-starter.<HOSTPUBLICIP>.xip.io...
+-----> Creating http nginx.conf
+-----> Running nginx-pre-reload
+       Reloading nginx
+-----> Setting config vars
+       DOKKU_APP_RESTORE: 1
+
+=====> Application deployed:
+       http://hackathon-starter.<HOSTPUBLICIP>.xip.io
+{% endhighlight %}
+
+To verify the application has been deployed successfully, browse to the URL at the end of the output (e.g.:http://hackathon-starter.<HOSTPUBLICIP>.xip.io) and you will see the app running. Try creating a new account.
+
+<figure>
+	<img src="../images/deployapp.png"/>
+	<figcaption>Screenshot of deployed app</figcaption>
+</figure>
+

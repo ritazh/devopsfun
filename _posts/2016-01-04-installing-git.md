@@ -73,14 +73,22 @@ Before we can get started, you need to register with GitHub for a free account. 
 ### Forking a Repository to your Account
 Now you are ready to do more with Git. Let's start with a sample project. Head over to the [devopsfun repo on GitHub](https://github.com/ritazh/devopsfun) repository and click the little 'fork' button in the upper right.
 
-![Fork the repo]({{ site.rel_url }}/images/fork.png)
+<figure>
+  <img src="../images/fork.gif"/>
+  <figcaption>Fork repo to your own</figcaption>
+</figure>
 
 This will create a copy of the repository as it exists in the original account into your own account.
 
 ### Cloning the Repository to Your Machine
 Visit your fork (which should be at github.com/{your_github_username}/devopsfun) and copy the "HTTPS Clone URL". Using this URL, you're able to `clone` the repository, which downloads the whole repository, including its history and information about its origin locally. From PowerShell on Windows or terminal on Mac, change into the directory where you would like to clone your repo.
 
-![Clone the repo]({{ site.rel_url }}/images/clone.png)
+<figure>
+  <img src="../images/clone.gif"/>
+  <figcaption>Copy your repo URL</figcaption>
+</figure>
+
+Clone the code to your local machine.
 
 {% highlight bash %}
 $ git clone https://github.com/{your_github_username}/devopsfun
@@ -146,11 +154,17 @@ $ git push -u origin NAME_OF_YOUR_NEW_BRANCH
 {% endhighlight %}
 
 ### Bonus: Making a Pull Request
-Now, head over to the [devopsfun](https://github.com/ritazh/devopsfun) repository. In most cases, GitHub will pick up on the fact that you just pushed a branch with some changes to your local fork, assuming that you probably want for those changes to end up in the upstream branch. To help you, it'll show a little box right above the code asking you if you want to make a pull request.
+Now, head over to the [devopsfun](https://github.com/ritazh/devopsfun) repository. In most cases, GitHub will pick up on the fact that you just pushed a branch with some changes to your local fork. The `Compare & pull request` button will appear in case you want to push those changes to the upstream repo. 
 
-![Make a Pull Request]({{ site.rel_url }}/images/pullrequest.png)
+<figure>
+  <img src="../images/newpr.png"/>
+</figure>
 
-Click that button. GitHub will open up the 'Create a Pull Request Page'. It is a good idea to list the feature you have created or the bug you have fixed by referencing an issue #. 
+After you have clicked the `Compare & pull request` button, GitHub will open up the 'Create a Pull Request Page'. It is a good idea to list the feature you have created or the bug you have fixed by referencing an issue #. 
+
+<figure>
+  <img src="../images/comparepr.png"/>
+</figure>
 
 As soon as you hit the `Create Pull Request` button, it'll show up in the list of pull requests.
 
