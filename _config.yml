@@ -4,8 +4,8 @@ disqus_shortname: devopsfun
 reading_time:     true
 words_per_minute: 200
 baseurl: "/devopsfun"
-url: "http://ritazh.github.io"
-rel_url: "http://ritazh.github.io/devopsfun"
+url: "//ritazh.github.io"
+rel_url: "//ritazh.github.io/devopsfun"
 
 # Owner/author information
 owner:
@@ -50,7 +50,7 @@ sass:
 permalink:   /:categories/:title/
 
 # Amount of post to show on home page
-paginate: 5
+paginate: 1
 
 kramdown:
   auto_ids: true
