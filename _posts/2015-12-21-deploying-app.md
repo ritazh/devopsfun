@@ -81,6 +81,12 @@ origin	https://github.com/sahat/hackathon-starter.git (fetch)
 origin	https://github.com/sahat/hackathon-starter.git (push)
 {% endhighlight %}
 
+### Add SSH Key
+Before you can push anything to remote git, you have to first add the private key you have created for deploying apps to Dokku:
+{% highlight bash %}
+ssh-add <your-dokku-deploy-private-key>
+{% endhighlight %}
+
 ### Update Environment File for Mongo
 Before we push our app to Dokku, we need to update the `.env.example` file to tell the app to use the MongoDB instance we just created.
 
@@ -89,7 +95,6 @@ Recall this is the current `.env.example` configuration setting for Mongo:
 ```
 MONGODB=mongodb://localhost:27017/test
 ```
-
 
 We need to update this value to the `$MONGO_URL` environment variable set in the previous step when we linked the Mongo service to this app.
 
@@ -160,7 +165,7 @@ The entire process builds a Docker image with all the dependencies our Node.js a
        http://hackathon-starter.<HOSTPUBLICIP>.xip.io
 {% endhighlight %}
 
-To verify the application has been deployed successfully, browse to the URL at the end of the output (e.g.:http://hackathon-starter.<HOSTPUBLICIP>.xip.io) and you will see the app running. Try creating a new account.
+To verify the application has been deployed successfully, browse to the URL at the end of the output (e.g.:`http://hackathon-starter.<HOSTPUBLICIP>.xip.io`) and you will see the app running. Try creating a new account.
 
 <figure>
 	<img src="../images/deployapp.png"/>
