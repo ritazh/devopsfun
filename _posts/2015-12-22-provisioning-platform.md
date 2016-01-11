@@ -19,7 +19,7 @@ Now that we have built our app, let's create an environment for our developers t
 In this module, you will learn how to create your own application platform on Azure and in the next module you will learn how to deploy and scale the app we built in previous module to this platform on Azure.
 
 ### What is Dokku
-[Dokku](http://dokku.viewdocs.io/dokku/) is a Docker powered open source Platform for deploying apps for development and testing. 
+[Dokku](http://dokku.viewdocs.io/dokku/) is a Docker powered, single instance, open source Platform for deploying apps for development and testing. 
 
 It enables developers to self-host a platform that automatically builds a Docker image for any application you push to it. These apps can be connected to databases that also run as local containers using container linking.
 
