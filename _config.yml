@@ -3,9 +3,10 @@ description:      Training for Open Source DevOps Workflow
 disqus_shortname: devopsfun
 reading_time:     true
 words_per_minute: 200
-baseurl: "/devopsfun"
+baseurl: "/devopsfun/"
 url: "//ritazh.github.io"
 rel_url: "//ritazh.github.io/devopsfun"
+root_url: "https://ritazh.github.io/devopsfun"
 
 # Owner/author information
 owner:
@@ -37,7 +38,7 @@ bing_verify:
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/los_angeles
 future:      true
-highlighter: pygments
+highlighter: rouge #pygments
 markdown:    kramdown
 gems:
   - jekyll-sitemap
