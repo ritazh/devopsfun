@@ -18,13 +18,13 @@ date: 2016-01-04T23:32:07-08:00
 Chances are, you already have git running on your computer or you at least have heard of Git before. For this training, you will need to setup git locally and know few basics about git.
 
 #### Table of Contents
-  - [Install Git](#install-git)
-  - [Fork a Repository to your Account](#fork-the-repository-to-your-account)
-  - [Clone a sample node app Repository to your Machine](#clone-the-case-study-repository-to-your-machine)
+  - [Installing Git](#installing-git)
+  - [Forking a Repository to your Account](#forking-the-repository-to-your-account)
+  - [Cloning the Repository to your Machine](#cloning-the-repository-to-your-machine)
   - [Creating a new Branch for your repo](#creating-a-new-branch-for-your-repo)
   - [Staging your Changes for a Commit](#staging-your-changes-for-a-commit)
-  - [Commit your Changes](#commit-your-changes)
-  - [Push your new Branch to Your Fork on GitHub](#push-your-new-branch-to-your-fork-on-github)
+  - [Committing your Changes](#committing-your-changes)
+  - [Pushing your new Branch to Your Fork on GitHub](#pushing-your-new-branch-to-your-fork-on-github)
 
 ### Installing Git
 If you don't have Git installed, navigate to the official [Git Download page and download it](https://git-scm.com/download). 
