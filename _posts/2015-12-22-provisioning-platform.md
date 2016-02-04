@@ -38,31 +38,53 @@ For example, here are two SSH keys to be used for accessing Dokku VM and for dep
 ~/.ssh/dokkuapps
 {% endhighlight %}
 
-Now, let's head over to the [Dokku deployment for Azure page](https://azure.microsoft.com/en-us/documentation/templates/dokku-vm/) and click the `Deploy to Azure` button to provision resources using Azure Resource Manager (ARM) template.
+Now, let's install the [Azure CLI](https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install/) to provision resources using an Azure Resource Manager (ARM) template.
 
-Once you are in the [Azure Portal](https://portal.azure.com/), provide specific values for this deployment. 
+First login to the Azure CLI:
+{% highlight bash %}
+$ azure login
+{% endhighlight %}
 
-- For `NEWSTORAGEACCOUNTNAME` and `DNSNAMEFORPUBLICIP`, you need to provide unique values for these fields.
+Instruct the client to switch to ARM mode:
+{% highlight bash %}
+$ azure config mode arm
+{% endhighlight %}
 
-- For `SSHKEYDATA`, use the public key for the SSH key you generated in [Generating two New SSH Key Pairs](#generating-two-new-ssh-key-pairs) to use to log into the host. 
+Next, download [azuredeploy.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.json) and [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.parameters.json) locally. Edit `azuredeploy.parameters.json` to provide values to the parameters required for the cluster. You can also refer to a sample `azuredeploy.parameters.json` [here](https://github.com/ritazh/devopsfun/blob/gh-pages/azuredeploy.parameters.json)for your reference.
+
+- For `newStorageAccountName` and `dnsNameForPublicIP`, you need to provide unique values for these fields.
+
+- For `SSHKEYDATA`, copy the public key of the SSH key you generated in [Generating two New SSH Key Pairs](#generating-two-new-ssh-key-pairs), then Paste the result into `parameters.json`. This key will be used to log into the host.
 {% highlight bash %}
 # For example, to get the public key of the dokku key:
 $ cat ~/.ssh/dokku.pub
 {% endhighlight %}
 
-<figure>
-	<img src="../images/provisiondokku.png"/>
-	<figcaption>Screenshot of Azure portal</figcaption>
-</figure>
+To kickoff deployment on Azure, type the following in terminal:
+{% highlight bash %}
+$ azure group create --name devopsfunrg --location "West US" --deployment-name devopsfun --template-file azuredeploy.json --parameters-file azuredeploy.parameters.json
+{% endhighlight %}
 
-Ensure to select your Azure Subscription, then provide a unique name to create a new resource group for this deployment. 
-<figure>
-	<img src="../images/provisiondokku2.png"/>
-	<figcaption>Screenshot of Azure portal</figcaption>
-</figure>
-
-To kickoff deployment on Azure, click Create. 
 Actual deployment time may vary. It should take less than 5 minutes for provision to complete.
+
+To verify, you can check the `ProvisionState` by running the following command in terminal. When the deployment is completed, the `ProvisionState` should go from `Running` to `Succeeded`. 
+{% highlight bash %}
+$ azure group deployment show devopsfunrg devopsfun
+
+# Sample output:
++ Getting deployments                                     
+data:    DeploymentName     : devopsfun
+data:    ResourceGroupName  : devopsfunrg
+data:    ProvisioningState  : Running
+...
+{% endhighlight %}
+
+You can also verify by logging into the [Azure Portal](https://portal.azure.com/) and once deployment is done, you should see the following resources:
+
+<figure>
+	<img src="../images/dokkuonazure.png"/>
+	<figcaption>Screenshot of Azure portal</figcaption>
+</figure>
 
 ### Configuring Dokku
 Once we have all the resources provisioned on Azure, let's configure Dokku to complete the setup.

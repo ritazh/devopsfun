@@ -1,0 +1,24 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "newStorageAccountName":{
+      "value": "devopsfunstorage"
+    },
+    "location": {
+      "value": "West US"
+    },
+    "adminUsername": {
+      "value": "dokkuadmin"
+    },
+    "sshKeyData": {
+      "value": ""
+    },
+    "dnsNameForPublicIP": {
+      "value": "devopsfun"
+    },
+    "dokkuVersion": {
+      "value": "0.4.5"
+    }
+  }
+}
