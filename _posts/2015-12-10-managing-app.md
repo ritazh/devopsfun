@@ -11,10 +11,10 @@ image:
   creditlink:
 comments:
 share:
-date: 2015-12-20T15:03:36-08:00
+date: 2015-12-10T15:03:36-08:00
 ---
 ## Managing Apps
-In the previous module, we were able to deploy our application to the Dokku platform on Azure with a simple `git push`. Now in this module, let's see how we can continously deploy and make updates to the application.
+In the previous module, we were able to continuously integrate and deploy updates of our application to the Dokku platform on Azure with a simple `git push`. Now in this module, let's see how we scale and configure the application to address production load.
 
 ### Scaling App
 Dokku allows us to run multiple applications each backed by any number of containers. It comes with nginx out of the box, which provides HTTP load balancing and routing. With Dokku, we can horizontally scale our apps simply by running more containers on a single VM instance. 
