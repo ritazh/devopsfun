@@ -14,9 +14,12 @@ share:
 date: 2016-01-06T22:27:40-08:00
 ---
 ### Installing Node.js
-Download install package from [https://nodejs.org](https://nodejs.org)
+Download install package from [https://nodejs.org](https://nodejs.org). At the time of writing this, we have tested and validated the sample application against Node 5.5.0 and npm 3.3.12. Download the specific release of Node 5.5.0 from [here](https://nodejs.org/en/download/releases/) to ensure later modules in this training work properly.
 
-When you install Node.js, you'll want to ensure your `PATH` variable includes your install path so you can call Node from anywhere.
+When you install Node.js, you'll want to ensure your `PATH` variable includes your install path so you can call Node from anywhere. Node comes with npm installed so you should have a version of npm. To install a specific version of npm globallly, run the following:
+{% highlight js %}
+npm install -g npm@3.3.12
+{% endhighlight %}
 
 ### Testing Your Install
 Create a new directory named `hello-world`, add a new `app.js` file with the following content:
