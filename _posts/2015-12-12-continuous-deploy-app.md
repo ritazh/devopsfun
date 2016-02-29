@@ -38,7 +38,7 @@ First, we need to generate a GitHub token to use with the GitHub API to ensure t
 
 <figure>
   <img src="../images/jenkinsgengithubtoken.png"/>
-  <figcaption>Screenshot of Jenkins GitHub Plugin</figcaption>
+  <figcaption>Screenshot of generating a GitHub toke for Jenkins</figcaption>
 </figure>
 
 From your browser, click `Manage Jenkins` then click `Configure System`. Under `GitHub Plugin Configuration`, click `Add GitHub Server Config` to add credentials. Click `Add` next to the `Credentials` dropdown. From `Add Credentials` view, select `Secret text` from the dropdown. Set `Scope` to `Global` and paste the GitHub token in `Secret` text field. Provide a description, for example `github jenkins`. Then click `Add`. Now the `Credentials` dropdown should be set to the Jenkins Credential we just created. Click `Verify credentials` to verify connectivity. Click Save.
