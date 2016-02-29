@@ -87,6 +87,16 @@ Before you can push anything to remote git, you have to first add the private ke
 ssh-add <your-dokku-deploy-private-key>
 {% endhighlight %}
 
+#### Adding SSH Key from Windows
+If you are using Windows, run the following commands from an elevated Command Prompt (right click, select 'Run as Administrator'):
+{% highlight bash %}
+cd path-to-Git/bin
+# for example C:\Program Files\Git\bin
+bash
+exec ssh-agent bash
+ssh-add <your-dokku-deploy-private-key>
+{% endhighlight %}
+
 ### Update Environment File for Mongo
 Before we push our app to Dokku, we need to update the `.env.example` file to tell the app to use the MongoDB instance we just created.
 
