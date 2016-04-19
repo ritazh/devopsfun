@@ -156,7 +156,7 @@ Now let's use the key you just created to add a new deploy user to Dokku. To add
 $ chmod 400 ~/dokku
 
 # Add the jenkinsdokku public key to dokku to allow git push access
-$ cat jenkinsdokku.pub | ssh -i ~/dokku <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com "sudo sshcommand acl-add dokku jenkinsdokku"
+$ cat ~/.ssh/jenkinsdokku.pub | ssh -i ~/.ssh/dokku <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com "sudo sshcommand acl-add dokku jenkinsdokku"
 4d:94:8d:d4:2e:6a:3b:22:e7:a6:66:ea:8e:ad:b0:e5
 {% endhighlight %}
 
@@ -177,7 +177,7 @@ then
 echo "dokku already exist";
 else
 echo "dokku remote does not already exist";
-git remote add dokku dokku@ritadokku.eastus2.cloudapp.azure.com:hackathon-starter;
+git remote add dokku dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter;
 fi
 git remote -v
 

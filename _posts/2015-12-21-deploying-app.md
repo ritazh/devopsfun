@@ -44,7 +44,7 @@ Our Node.js application won't work without a database. Previously we were test o
 # plugin installation requires root, hence the user change
 $ sudo dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
 
-# create a postgres service with the name nodeapp
+# create a mongodb service with the name nodeapp
 $ dokku mongo:create nodeapp
 -----> Starting container
        Waiting for container to be ready
@@ -73,7 +73,7 @@ nodeapp    mongo:3.0.6  running  -              hackathon-starter
 
 From your local environment (not the Dokku VM), navigate to your project folder. Add a `dokku` remote to your local git repository using the `dokku` user name to push the app.
 {% highlight bash %}
-$ git remote add dokku dokku@ritadokku.eastus2.cloudapp.azure.com:hackathon-starter
+$ git remote add dokku dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter
 $ git remote -v
 dokku	dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter (fetch)
 dokku	dokku@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com:hackathon-starter (push)
