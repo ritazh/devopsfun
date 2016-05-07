@@ -55,7 +55,7 @@ $ dokku mongo:create nodeapp
 Each official datastore offers a `link` method to link a service to any application. We will link the new mongodb instance to our Node.js application. Note the environment variable `MONGO_URL` has been set to the new instance. We will need this environment variable in a later step.
 
 {% highlight bash %}
-$ dokku mongo:link nodeapp hackathon-starterno config vars for hackathon-starter
+$ dokku mongo:link nodeapp hackathon-starter --no config vars for hackathon-starter
 -----> Setting config vars
        MONGO_URL: mongodb://nodeapp:1080854ca703fc3de69fad128ea553ef@dokku-mongo-nodeapp:27017/nodeapp
 -----> Restarting app hackathon-starter
