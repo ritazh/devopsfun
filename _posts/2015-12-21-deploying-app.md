@@ -25,7 +25,8 @@ Dokku defaults to using Buildpack to deploy applications, unless a valid Dockerf
 
 For the purpose of this training, we are going to deploy our application with builtin buildpacks. During `git push`, Dokku will automatically detect the right Buildpack for your application, you will see `-----> Node.js app detected` in the output.
 
-SSH into the host we just provisioned using the private key of the ssh key pair we used in the previous module:
+SSH into the host we just provisioned using the *private key* of the key pair we created in the previous module for the purpose of ssh into the Dokku instance. For example, ~/.ssh/dokku, not the key pair for deploying apps.
+
 {% highlight bash %}
 $ ssh -i <your-ssh-private-key> <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com
 {% endhighlight %}
@@ -82,13 +83,15 @@ origin	https://github.com/sahat/hackathon-starter.git (push)
 {% endhighlight %}
 
 ### Add SSH Key
-Before you can push anything to remote git, you have to first add the private key you have created for deploying apps to Dokku:
+Before you can push anything to remote git, you have to first add the *private key* of the key pair you created for deploying apps to Dokku in the previous module. For example, ~/.ssh/dokkuapps, not the key pair created for ssh into the Dokku instance.
+
 {% highlight bash %}
 ssh-add <your-dokku-deploy-private-key>
 {% endhighlight %}
 
 #### Adding SSH Key from Windows
-If you are using Windows, run the following commands from an elevated Command Prompt (right click, select 'Run as Administrator'):
+If you are using Windows, run the following commands from Git Bash to add the *private key* of the key pair you created for deploying apps to Dokku in the previous module. For example, `~\.ssh\dokkuapps`, not the key pair created for ssh into the Dokku instance.
+
 {% highlight bash %}
 cd path-to-Git/bin
 # for example C:\Program Files\Git\bin

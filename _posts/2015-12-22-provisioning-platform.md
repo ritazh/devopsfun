@@ -27,7 +27,12 @@ It enables developers to self-host a platform that automatically builds a Docker
 Before we run the installation for Dokku on Microsoft Azure, we need to provision all the required resources for Dokku. At the end of this step, we should have a Virtual Machine, a public IP, a VNET on Azure.
 
 #### Generating two New SSH Key Pairs
-For this environment, we need to [create two new SSH key pairs](https://help.github.com/articles/generating-ssh-keys/) to be used for accessing the host and for deploying apps using `ssh-keygen`.
+For this environment, we need to create *two* new SSH key pairs. Follow [these steps](https://help.github.com/articles/generating-ssh-keys/) to create these SSH key pairs to be used for accessing the host and for deploying apps to Dokku using `ssh-keygen`. 
+
+> Note: 
+> * When prompted for password, you can either provide a password for the key or press enter to ignore password. 
+> * When prompted to provide a file name for the key, make sure you create two unique names. For example: `dokku` for the key to be used to ssh into the Dokku instance and `dokkuapps` for the key to be used to git push app code to Dokku.
+
 {% highlight bash %}
 $ ssh-keygen -t rsa -b 4096 -C [your_email@email.com]
 {% endhighlight %}
@@ -54,7 +59,8 @@ Next, download [azuredeploy.json](https://github.com/Azure/azure-quickstart-temp
 
 - For `newStorageAccountName` and `dnsNameForPublicIP`, you need to provide unique values for these fields.
 
-- For `SSHKEYDATA`, copy the public key of the SSH key you generated in [Generating two New SSH Key Pairs](#generating-two-new-ssh-key-pairs), then Paste the result into `parameters.json`. This key will be used to log into the host.
+- For `SSHKEYDATA`, copy the public key of the SSH key you generated in the previous step [Generating two New SSH Key Pairs](#generating-two-new-ssh-key-pairs), then Paste the result into `parameters.json`. Make sure to copy the entire output of the public key, starting with `ssh-rsa ...`, and ends with your email. This value should be the public key of the key pair you created in the previous step for the purpose of ssh into the Dokku host. For example, ~/.ssh/dokku.pub, not the key to be used for deploying apps.
+
 {% highlight bash %}
 # For example, to get the public key of the dokku key:
 $ cat ~/.ssh/dokku.pub
@@ -97,10 +103,12 @@ http://<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com
 
 From your browser, provide the following values to setup Dokku.
 
-- For `Public Key`, copy and paste the public key of the SSH key pair you created for deploying apps to Dokku. 
+- For `Public Key`, copy and paste the entire output of the public key of the key pair you created in the previous step for the purpose of deploying apps to Dokku. For example, ~/.ssh/dokkuapps.pub, not the key pair used for SSH into the Dokku instance.
+
 {% highlight bash %}
 $ cat ~/.ssh/dokkuapps.pub 
 {% endhighlight %}
+
 - For 'Hostname', concatenate the public IP of your Dokku host with `xip.io` as its own domain name. To get the public IP of your Dokku host, you can navigate to [Microsoft Azure Portal](https://portal.azure.com/) to view the Dokku VM's public IP address.
 - Select the "Use virtualhost naming for apps" checkbox.
 
