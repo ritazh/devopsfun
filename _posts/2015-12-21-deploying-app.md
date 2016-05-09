@@ -31,6 +31,14 @@ SSH into the host we just provisioned using the *private key* of the key pair we
 $ ssh -i <your-ssh-private-key> <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com
 {% endhighlight %}
 
+> If you get the following error:
+"Permissions 0664 for 'dokku.pub' are too open.
+It is required that your private key files are NOT accessible by others.
+This private key will be ignored.
+Load key "dokku.pub": bad permissions
+Permission denied (publickey)."
+Set the correct permission for the file with `chmod 600 dokku.pub`. Then try SSH again into the VM.
+
 Create a new Dokku application:
 {% highlight bash %}
 $ dokku apps:create hackathon-starter
