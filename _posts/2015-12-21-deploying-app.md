@@ -92,6 +92,7 @@ origin	https://github.com/sahat/hackathon-starter.git (push)
 
 ### Add SSH Key
 Before you can push anything to remote git, you have to first add the *private key* of the key pair you created for deploying apps to Dokku in the previous module. For example, ~/.ssh/dokkuapps, not the key pair created for ssh into the Dokku instance.
+> Note: If you forgot to create a second set of key pairs for deploying apps or happened to copy the incorrect key during setup, then you can follow the section below to update the value for the key.
 
 {% highlight bash %}
 ssh-add <your-dokku-deploy-private-key>
@@ -99,6 +100,7 @@ ssh-add <your-dokku-deploy-private-key>
 
 #### Adding SSH Key from Windows
 If you are using Windows, run the following commands from Git Bash to add the *private key* of the key pair you created for deploying apps to Dokku in the previous module. For example, `~\.ssh\dokkuapps`, not the key pair created for ssh into the Dokku instance.
+> Note: If you forgot to create a second set of key pairs for deploying apps or happened to copy the incorrect key during setup, then you can follow the section below to update the value for the key.
 
 {% highlight bash %}
 cd path-to-Git/bin
@@ -107,6 +109,13 @@ bash
 exec ssh-agent bash
 ssh-add <your-dokku-deploy-private-key>
 {% endhighlight %}
+
+#### Update Dokku Deployment Key
+If you forgot to create a second set of key pairs for deploying apps or happened to copy the incorrect key during setup, then you can do the following to update the Dokku App Deployment key. From a terminal on Mac or a command prompt on Windows, type the following:
+
+```
+cat <path-to-dokku-app-deployment-public-key> | ssh -i <your-dokku-VM-ssh-private-key> <your-admin-user-name>@<DNSNAMEFORPUBLICIP>.<LOCATION>.cloudapp.azure.com "sudo sshcommand acl-add dokku dokkuappdeploy"
+```
 
 ### Update Environment File for Mongo
 Before we push our app to Dokku, we need to update the `.env.example` file to tell the app to use the MongoDB instance we just created.
