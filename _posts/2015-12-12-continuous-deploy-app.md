@@ -77,6 +77,8 @@ Now go ahead and checkin some changes to your repo. You should see this Jenkins 
 ### Setting up Node
 To build and test Node.js applications with Jenkins, we need to configure the NodeJS plugin to build applications against different versions of Node. It also handles the installations and writes Jenkins scripts in Node. From Jenkins, click `Manage Jenkins` and `Configure System`. Under `NodeJS` section, click `NodeJS installations`. For NodeJS Name, provide a value so you can easily refer to it in a job. Check the `Install automatically` box, click `Add Installer` dropdown to select `Install from nodejs.org`. Select `NodeJS 5.5.0` for `Installation`. Leave npm packages empty, since we will build dependencies locally for each job. Click Save.
 
+> Note: If you are using Jenkins 2, the UI is a little different. You can find `NodeJS` configuration settings under `Manage Jenkins` and `Configure Tools`. 
+
 <figure>
   <img src="../images/jenkinsnodeinstall.png"/>
   <figcaption>Screenshot of Setting up Node on Jenkins</figcaption>
