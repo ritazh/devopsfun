@@ -55,9 +55,9 @@ Instruct the client to switch to ARM mode:
 $ azure config mode arm
 {% endhighlight %}
 
-Next, download [azuredeploy.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.json) and [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.parameters.json) locally. Edit `azuredeploy.parameters.json` to provide values to the parameters required for the cluster. You can also refer to a sample `azuredeploy.parameters.json` [here](https://github.com/ritazh/devopsfun/blob/gh-pages/provisiondokku/azuredeploy.parameters.json)for your reference.
+Next, download [azuredeploy.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.json) and [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/blob/master/dokku-vm/azuredeploy.parameters.json) locally. Edit `azuredeploy.parameters.json` to provide values to the parameters required for the cluster. You can also refer to a sample `azuredeploy.parameters.json` [here](https://github.com/ritazh/devopsfun/blob/gh-pages/provisiondokku/azuredeploy.parameters.json) for your reference.
 
-- For `newStorageAccountName` and `dnsNameForPublicIP`, you need to provide unique values for these fields.
+- For `dnsLabelPrefix`, you need to provide a unique value for this field.
 
 - For `SSHKEYDATA`, copy the public key of the SSH key you generated in the previous step [Generating two New SSH Key Pairs](#generating-two-new-ssh-key-pairs), then Paste the result into `parameters.json`. Make sure to copy the entire output of the public key, starting with `ssh-rsa ...`, and ends with your email. This value should be the public key of the key pair you created in the previous step for the purpose of ssh into the Dokku host. For example, ~/.ssh/dokku.pub, not the key to be used for deploying apps.
 
@@ -88,7 +88,7 @@ data:    ProvisioningState  : Running
 You can also verify by logging into the [Azure Portal](https://portal.azure.com/) and once deployment is done, you should see the following resources:
 
 <figure>
-	<img src="../images/dokkuonazure.png"/>
+	<img src="../images/dokkuresourceonazure.png"/>
 	<figcaption>Screenshot of Azure portal</figcaption>
 </figure>
 
@@ -115,7 +115,7 @@ $ cat ~/.ssh/dokkuapps.pub
 Click `Finish Setup` to continue.
 
 <figure>
-	<img src="../images/configuredokku.png"/>
+	<img src="../images/configuredokku063.png"/>
 	<figcaption>Screenshot of Configuring Dokku</figcaption>
 </figure>
 
